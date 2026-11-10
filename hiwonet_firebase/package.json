@@ -1,0 +1,25 @@
+{
+  "name": "hiwonet-firebase",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Firebase backend config, security rules and test suite for the HIWONET-RESPONSE dispatch and admin consoles.",
+  "scripts": {
+    "test": "node test/master_test_suite.js",
+    "test:suite": "node test/master_test_suite.js",
+    "test:emulator": "firebase emulators:exec --only firestore,database --project demo-hiwonet \"vitest run\"",
+    "test:record": "firebase emulators:exec --only firestore,database --project demo-hiwonet --export-on-exit=./emulator-data \"vitest run; node scripts/upload-catalog.js && node scripts/upload-results.js\"",
+    "emulators": "firebase emulators:start --only firestore,database --project demo-hiwonet --import=./emulator-data",
+    "catalog": "node scripts/export-catalog.js"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^4.0.1",
+    "firebase": "^11.0.0",
+    "firebase-admin": "^13.0.0",
+    "firebase-tools": "^14.0.0",
+    "vitest": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

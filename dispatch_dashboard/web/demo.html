@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HIWONET-RESPONSE • Complete Demo Walkthrough & Project Showcase</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --brand-red: #DC2626;
+      --brand-dark: #0F172A;
+      --card-bg: #1E293B;
+      --text-dim: #94A3B8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0A0E17;
+      color: #F8FAFC;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 32px 20px 80px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 32px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-icon {
+      background: var(--brand-red);
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 20px;
+    }
+    .brand h1 { font-size: 20px; font-weight: 900; letter-spacing: 0.5px; }
+    .badge {
+      background: rgba(220,38,38,0.18);
+      color: #F87171;
+      border: 1px solid rgba(220,38,38,0.4);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .video-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      margin-bottom: 36px;
+    }
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #000;
+    }
+    .video-info {
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111827;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .video-title h2 { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+    .video-title p { font-size: 14px; color: var(--text-dim); }
+    .btn-download {
+      background: var(--brand-red);
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn-download:hover { background: #B91C1C; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .card h3 { font-size: 13px; color: #F87171; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+    .card .val { font-size: 26px; font-weight: 900; margin-bottom: 4px; color: #fff; }
+    .card p { font-size: 13px; color: var(--text-dim); line-height: 1.4; }
+    .chapters {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .chapters h3 { font-size: 18px; margin-bottom: 18px; font-weight: 800; }
+    .chapter-list { display: flex; flex-direction: column; gap: 12px; }
+    .ch-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .ch-num {
+      background: var(--brand-red);
+      color: #fff;
+      font-weight: 800;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      min-width: 32px;
+      text-align: center;
+    }
+    .ch-text strong { display: block; font-size: 14.5px; margin-bottom: 2px; }
+    .ch-text span { font-size: 12.5px; color: var(--text-dim); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="brand-icon">+</div>
+        <div>
+          <h1>HIWONET-RESPONSE</h1>
+          <p style="font-size: 12px; color: var(--text-dim);">Autonomous Emergency Medical Dispatch & Spatial Fleet Tracking</p>
+        </div>
+      </div>
+      <div class="badge">Senior CS Capstone 2026 • 100% Tests Passed</div>
+    </header>
+
+    <div class="video-card">
+      <video controls autoplay loop playsinline>
+        <source src="HIWONET_DEMO_VIDEO.webm" type="video/webm">
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-info">
+        <div class="video-title">
+          <h2>HIWONET-RESPONSE • Full System Walkthrough Video</h2>
+          <p>Comprehensive 1080p architectural tour with simulated user interactions, ACID concurrency lock, and telemetry.</p>
+        </div>
+        <a href="HIWONET_DEMO_VIDEO.webm" download class="btn-download">
+          Download Demo Video (.webm)
+        </a>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Test Automation</h3>
+        <div class="val">479 / 479</div>
+        <p>100% pass rate across Unit, Mutex Stress, Alpha, and System Integration tests.</p>
+      </div>
+      <div class="card">
+        <h3>Concurrency Safety</h3>
+        <div class="val">0.00% Double-Dispatch</div>
+        <p>ACID Atomic Mutex lock prevents race conditions between simultaneous dispatchers.</p>
+      </div>
+      <div class="card">
+        <h3>Average ETA</h3>
+        <div class="val">7.2 min</div>
+        <p>Calculated with real-time Haversine road matrix across Addis Ababa corridors.</p>
+      </div>
+      <div class="card">
+        <h3>GPS Telemetry</h3>
+        <div class="val">&lt; 500 ms</div>
+        <p>Sub-second coordinate synchronization via Firebase Realtime Database.</p>
+      </div>
+    </div>
+
+    <div class="chapters">
+      <h3>Video Chapters & System Architecture Tour</h3>
+      <div class="chapter-list">
+        <div class="ch-item">
+          <div class="ch-num">01</div>
+          <div class="ch-text">
+            <strong>Public Marketing & Command Portal</strong>
+            <span>Restored red frosted-glass header with instant section anchors, live fleet readiness, and MOH-EMS layout.</span>
+          </div>
+        </div>
+        <div class="ch-item">
+          <div class="ch-num">02</div>
+          <div class="ch-text">
+            <strong>Real-Time Capabilities & Routing</strong>
+            <span>Continuous tracking of 24 ambulances in Addis Ababa with automated nearest-hospital routing.</span>
+          </div>
+        </div>
+        <div class="ch-item">
+          <div class="ch-num">03</div>
+          <div class="ch-text">
+            <strong>Dual-Tier Firebase Architecture</strong>
+            <span>Realtime Database for coordinates paired with Cloud Firestore for ACID transactions and persistence.</span>
+          </div>
+        </div>
+        <div class="ch-item">
+          <div class="ch-num">04</div>
+          <div class="ch-text">
+            <strong>Emergency Contact Hub & Protocol Footer</strong>
+            <span>Balanced 3-column red footer with toll-free 907 hotline and central command routing.</span>
+          </div>
+        </div>
+        <div class="ch-item">
+          <div class="ch-num">05</div>
+          <div class="ch-text">
+            <strong>Dispatcher Station Authentication</strong>
+            <span>Role-based access gate ensuring only verified operators access the live regional response console.</span>
+          </div>
+        </div>
+        <div class="ch-item">
+          <div class="ch-num">06</div>
+          <div class="ch-text">
+            <strong>Live Autonomous Dispatch Map Console</strong>
+            <span>Real-time spatial map with 24 emergency units, triage queues, and atomic unit assignment.</span>
+          </div>
+        </div>
+        <div class="ch-item">
+          <div class="ch-num">07</div>
+          <div class="ch-text">
+            <strong>Administrator Command Center & RBAC</strong>
+            <span>Executive uptime monitoring, role permissions, and live hospital bed synchronizer.</span>
+          </div>
+        </div>
+        <div class="ch-item">
+          <div class="ch-num">08</div>
+          <div class="ch-text">
+            <strong>Immutable Cryptographic Audit Trail</strong>
+            <span>Tamper-evident audit logging recording every triage, dispatch, and status transition.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

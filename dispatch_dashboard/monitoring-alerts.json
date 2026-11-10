@@ -1,0 +1,119 @@
+{
+  "version": "1.0",
+  "name": "hiwonet-production-monitoring-and-budget-alerts",
+  "budget": {
+    "displayName": "HIWONET Emergency Dispatch Monthly Budget",
+    "budgetFilter": {
+      "projects": [
+        "projects/hiwonet-dispatch-prod"
+      ],
+      "creditTypesTreatment": "INCLUDE_ALL_CREDITS"
+    },
+    "amount": {
+      "specifiedAmount": {
+        "currencyCode": "USD",
+        "units": "500"
+      }
+    },
+    "thresholdRules": [
+      {
+        "thresholdPercent": 0.5,
+        "spendBasis": "CURRENT_SPEND"
+      },
+      {
+        "thresholdPercent": 0.8,
+        "spendBasis": "CURRENT_SPEND"
+      },
+      {
+        "thresholdPercent": 0.9,
+        "spendBasis": "CURRENT_SPEND"
+      },
+      {
+        "thresholdPercent": 1.0,
+        "spendBasis": "CURRENT_SPEND"
+      },
+      {
+        "thresholdPercent": 1.2,
+        "spendBasis": "FORECASTED_SPEND"
+      }
+    ],
+    "allUpdatesRule": {
+      "pubsubTopic": "projects/hiwonet-dispatch-prod/topics/billing-alerts",
+      "monitoringNotificationChannels": [
+        "projects/hiwonet-dispatch-prod/notificationChannels/ops-leads-email"
+      ],
+      "disableDefaultIamRecipients": false
+    }
+  },
+  "alertPolicies": [
+    {
+      "displayName": "Security: Brute-Force Admin Sign-in & MFA Lockouts",
+      "documentation": {
+        "content": "CRITICAL: Multiple consecutive failed 2FA verification attempts detected for an administrator account. The account has been placed into temporary lockout. Investigate immediately for potential brute-force intrusion.",
+        "mimeType": "text/markdown"
+      },
+      "conditions": [
+        {
+          "displayName": "Admin MFA lockout events >= 1",
+          "conditionMatchedLog": {
+            "filter": "resource.type=\"cloud_function\" AND (jsonPayload.action=\"admin_mfa_lockout\" OR jsonPayload.severity=\"CRITICAL_SECURITY\")"
+          }
+        }
+      ],
+      "combiner": "OR",
+      "notificationChannels": [
+        "projects/hiwonet-dispatch-prod/notificationChannels/security-oncall-pager"
+      ],
+      "severity": "CRITICAL"
+    },
+    {
+      "displayName": "Operations: Cloud Functions Error Spike (>1%)",
+      "documentation": {
+        "content": "Cloud Function execution failure rate exceeds 1% in a 5-minute rolling window. Inspect Cloud Logging for error traces in dispatchUnit or submitRegistration.",
+        "mimeType": "text/markdown"
+      },
+      "conditions": [
+        {
+          "displayName": "Function execution error rate",
+          "conditionThreshold": {
+            "filter": "resource.type=\"cloud_function\" AND metric.type=\"cloudfunctions.googleapis.com/function/execution_count\" AND metric.labels.status != \"ok\"",
+            "comparison": "COMPARISON_GT",
+            "thresholdValue": 5,
+            "duration": "300s",
+            "aggregations": [
+              {
+                "alignmentPeriod": "60s",
+                "perSeriesAligner": "ALIGN_RATE"
+              }
+            ]
+          }
+        }
+      ],
+      "combiner": "OR",
+      "notificationChannels": [
+        "projects/hiwonet-dispatch-prod/notificationChannels/devops-alerts"
+      ],
+      "severity": "ERROR"
+    },
+    {
+      "displayName": "Performance: Dispatch Latency Degradation (>800ms)",
+      "documentation": {
+        "content": "P95 execution latency for dispatchUnit exceeds 800ms. Risk of delayed emergency triage response.",
+        "mimeType": "text/markdown"
+      },
+      "conditions": [
+        {
+          "displayName": "dispatchUnit execution latency",
+          "conditionThreshold": {
+            "filter": "resource.type=\"cloud_function\" AND resource.labels.function_name=\"dispatchUnit\" AND metric.type=\"cloudfunctions.googleapis.com/function/execution_times\"",
+            "comparison": "COMPARISON_GT",
+            "thresholdValue": 800000000,
+            "duration": "180s"
+          }
+        }
+      ],
+      "combiner": "OR",
+      "severity": "WARNING"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://firebase.google.com/docs/firestore/solutions/schedule-export",
+  "version": "1.0",
+  "project": {
+    "dev": "hiwonet-dispatch-dev",
+    "staging": "hiwonet-dispatch-staging",
+    "production": "hiwonet-dispatch-prod"
+  },
+  "firestore": {
+    "pointInTimeRecovery": {
+      "status": "ENABLED",
+      "retentionPeriod": "7d",
+      "description": "Continuous PITR enabled with 1-minute recovery granularity for emergency incident data"
+    },
+    "scheduledBackups": [
+      {
+        "id": "daily-full-backup",
+        "description": "Daily automated full Firestore backup across all clinical and fleet collections",
+        "schedule": "0 2 * * *",
+        "timeZone": "UTC",
+        "retention": "30d",
+        "destinationBucket": "gs://hiwonet-firestore-backups-${PROJECT_ID}",
+        "storageClass": "COLDLINE",
+        "collections": [
+          "users",
+          "registrationRequests",
+          "hospitals",
+          "ambulances",
+          "incidents",
+          "auditLog",
+          "alerts",
+          "stats"
+        ]
+      },
+      {
+        "id": "weekly-immutable-audit-archive",
+        "description": "Immutable long-term compliance archive for audit trail and incident records",
+        "schedule": "0 3 * * 0",
+        "timeZone": "UTC",
+        "retention": "365d",
+        "destinationBucket": "gs://hiwonet-audit-archive-${PROJECT_ID}",
+        "storageClass": "ARCHIVE",
+        "collections": [
+          "auditLog",
+          "incidents"
+        ]
+      }
+    ]
+  },
+  "disasterRecovery": {
+    "targetRegion": "europe-west1",
+    "backupBucketLocation": "EU",
+    "rpoMinutes": 5,
+    "rtoMinutes": 30
+  }
+}

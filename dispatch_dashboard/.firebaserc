@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "hiwotnet-c97fd",
+    "dev": "hiwotnet-c97fd",
+    "staging": "hiwotnet-staging",
+    "prod": "hiwotnet-prod"
+  }
+}

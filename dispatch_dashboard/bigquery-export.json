@@ -1,0 +1,75 @@
+{
+  "$schema": "https://firebase.google.com/docs/extensions/official/firestore-bigquery-export",
+  "version": "1.0",
+  "extension": "firebase/firestore-bigquery-export@0.1.66",
+  "datasetLocation": "europe-west1",
+  "datasetId": "hiwonet_analytics",
+  "streamingPipelines": [
+    {
+      "collectionPath": "incidents",
+      "tableName": "incidents",
+      "partitioning": {
+        "field": "timestamp",
+        "type": "DAY"
+      },
+      "clustering": [
+        "severity",
+        "status"
+      ],
+      "wildcardMatching": true,
+      "views": {
+        "latestView": "incidents_latest",
+        "rawChangelog": "incidents_raw_changelog"
+      },
+      "description": "Continuous CDC sync of all emergency calls, triage levels, and dispatch lifecycle metrics"
+    },
+    {
+      "collectionPath": "auditLog",
+      "tableName": "audit_logs",
+      "partitioning": {
+        "field": "timestamp",
+        "type": "DAY"
+      },
+      "clustering": [
+        "action",
+        "role"
+      ],
+      "wildcardMatching": false,
+      "views": {
+        "latestView": "audit_logs_latest",
+        "rawChangelog": "audit_logs_raw_changelog"
+      },
+      "description": "Immutable security and administrative audit trail streaming for regulatory review"
+    },
+    {
+      "collectionPath": "ambulances",
+      "tableName": "ambulances",
+      "partitioning": {
+        "field": "lastUpdated",
+        "type": "DAY"
+      },
+      "clustering": [
+        "status",
+        "homeBase"
+      ],
+      "views": {
+        "latestView": "ambulances_latest",
+        "rawChangelog": "ambulances_raw_changelog"
+      },
+      "description": "Fleet status and hospital home base operational capacity tracking"
+    },
+    {
+      "collectionPath": "hospitals",
+      "tableName": "hospitals",
+      "partitioning": {
+        "field": "updatedAt",
+        "type": "DAY"
+      },
+      "views": {
+        "latestView": "hospitals_latest",
+        "rawChangelog": "hospitals_raw_changelog"
+      },
+      "description": "Regional hospital ICU bed, regular bed, and trauma center capacity tracking"
+    }
+  ]
+}
